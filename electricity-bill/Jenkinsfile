@@ -3,25 +3,31 @@ pipeline {
     agent any
 
     tools {
-       maven 'mvn'
+        maven 'mvn'
     }
 
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                dir('electricity-bill') {
+                    bat 'mvn clean compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('electricity-bill') {
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
+                dir('electricity-bill') {
+                    bat 'mvn package'
+                }
             }
         }
     }
